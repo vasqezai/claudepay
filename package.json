@@ -1,0 +1,32 @@
+{
+  "name": "@clpay/core",
+  "version": "1.0.0",
+  "description": "Autonomous payments for Claude using Solana, secured by pre-execution validation and risk analysis",
+  "type": "module",
+  "main": "skill/clpay.js",
+  "exports": {
+    ".": "./skill/clpay.js",
+    "./validator": "./skill/validator.js",
+    "./risk": "./skill/risk.js",
+    "./wallet": "./skill/wallet.js"
+  },
+  "scripts": {
+    "wallet": "node generate-wallet.js",
+    "demo": "node demo.js"
+  },
+  "keywords": [
+    "solana",
+    "ai",
+    "claude",
+    "payments",
+    "autonomous",
+    "web3",
+    "validation"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@solana/web3.js": "^1.95.0",
+    "zod": "^4.3.6"
+  }
+}
