@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "clpay": {
+      "command": "node",
+      "args": ["mcp-server.js"],
+      "cwd": "/FULL/PATH/TO/clpay",
+      "env": {
+        "CLPAY_WALLET": "./keys/dev-wallet.json",
+        "CLPAY_NETWORK": "devnet",
+        "CLPAY_RISK_THRESHOLD": "0.5",
+        "CLPAY_PER_TX_LIMIT": "0.1",
+        "CLPAY_DAILY_LIMIT": "1.0",
+        "CLPAY_ALLOWLIST": ""
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
