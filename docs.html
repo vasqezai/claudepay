@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLPAY — Documentation</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Jim+Nightshade&display=swap" rel="stylesheet">
+  <style>
+    .docs { max-width: 820px; margin: 0 auto; padding: 120px 24px 80px; position: relative; z-index: 1; }
+    .docs__nav { position: fixed; top: 80px; left: 24px; width: 200px; display: none; }
+    @media (min-width: 1200px) {
+      .docs__nav { display: block; }
+      .docs { margin-left: 260px; }
+    }
+    .docs__nav a {
+      display: block; padding: 6px 12px; font-size: 13px; color: var(--text-dim);
+      border-left: 2px solid var(--border); transition: all 0.2s;
+    }
+    .docs__nav a:hover, .docs__nav a.active {
+      color: var(--text); border-left-color: var(--accent);
+    }
+    .docs h1 { font-size: 36px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .docs h1 span { color: var(--accent); font-family: var(--font-accent); }
+    .docs > p.lead { color: var(--text-muted); font-size: 17px; line-height: 1.7; margin-bottom: 48px; }
+    .docs h2 {
+      font-size: 22px; font-weight: 700; margin-top: 56px; margin-bottom: 16px;
+      padding-top: 24px; border-top: 1px solid var(--border);
+    }
+    .docs h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+    .docs h3 { font-size: 16px; font-weight: 600; margin-top: 32px; margin-bottom: 10px; color: var(--accent); }
+    .docs p { color: var(--text-muted); font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
+    .docs ul { list-style: none; margin-bottom: 20px; }
+    .docs ul li {
+      position: relative; padding-left: 20px; margin-bottom: 8px;
+      font-size: 14px; color: var(--text-muted); line-height: 1.6;
+    }
+    .docs ul li::before {
+      content: ''; position: absolute; left: 0; top: 9px;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+    }
+    .docs pre {
+      background: #0d0d14; border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 20px; margin-bottom: 24px; overflow-x: auto;
+      font-family: var(--mono); font-size: 13px; line-height: 1.7; color: var(--text-muted);
+    }
+    .docs code:not(pre code) {
+      background: var(--accent-dim); color: var(--accent);
+      padding: 2px 7px; border-radius: 4px; font-size: 13px; font-family: var(--mono);
+    }
+    .docs table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 14px; }
+    .docs th { text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--border); color: var(--text); font-weight: 600; }
+    .docs td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+    .docs .callout {
+      background: rgba(230,57,70,0.06); border: 1px solid rgba(230,57,70,0.15);
+      border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 24px;
+    }
+    .docs .callout p { margin: 0; font-size: 14px; }
+    .docs .callout--warn { background: rgba(255,159,67,0.06); border-color: rgba(255,159,67,0.2); }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-dim); margin-bottom: 32px; }
+    .back-link:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="CLPAY Home">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="#E63946"/>
+          <path d="M10 16L14 20L22 12" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>CLPAY</span>
+      </a>
+      <div class="nav__links">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#how-it-works">How It Works</a>
+        <a href="index.html#security">Security</a>
+        <a href="docs.html" style="color:var(--text)">Docs</a>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="docs__nav" aria-label="Documentation navigation">
+    <a href="#installation">Installation</a>
+    <a href="#quick-start">Quick Start</a>
+    <a href="#configuration">Configuration</a>
+    <a href="#api-reference">API Reference</a>
+    <a href="#validator">Validator Agent</a>
+    <a href="#risk-engine">Risk Engine</a>
+    <a href="#security-model">Security Model</a>
+    <a href="#events">Events & Hooks</a>
+    <a href="#cli">CLI</a>
+  </nav>
+
+  <main class="docs">
+    <a href="index.html" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to home
+    </a>
+
+    <h1><span>CLPAY</span> Documentation</h1>
+    <p class="lead">Complete guide to integrating autonomous Solana payments into your Claude workflows. From installation to production deployment.</p>
+
+    <h2 id="installation">Installation</h2>
+    <p>Install CLPAY via npm:</p>
+    <pre>npm install @clpay/core @clpay/validator</pre>
+    <p>Or with yarn:</p>
+    <pre>yarn add @clpay/core @clpay/validator</pre>
+
+    <h3>Requirements</h3>
+    <ul>
+      <li>Node.js 18+ or Bun 1.0+</li>
+      <li>Solana CLI tools (optional, for key management)</li>
+      <li>A funded Solana wallet (devnet for testing)</li>
+    </ul>
+
+    <h2 id="quick-start">Quick Start</h2>
+    <p>Get up and running in under 5 minutes:</p>
+    <pre>import { CLPay } from '@clpay/core';
+
+const clpay = new CLPay({
+  network: 'devnet',
+  wallet: './keys/dev-wallet.json',
+  limits: { perTransaction: 0.1, daily: 1.0 },
+  riskThreshold: 0.5,
+});
+
+// Make a payment
+const result = await clpay.pay({
+  to: 'merchant-address.sol',
+  amount: 0.01,
+  reason: 'API access for data analysis',
+  taskContext: 'User requested market data aggregation',
+});
+
+console.log(result);
+// {
+//   status: 'approved',
+//   txHash: '4xK2...9mPq',
+//   riskScore: 0.08,
+//   necessity: 'high',
+//   simulation: { success: true, balanceChange: -0.01 }
+// }</pre>
+
+    <h2 id="configuration">Configuration</h2>
+    <p>Full configuration reference for the CLPay constructor:</p>
+
+    <table>
+      <thead>
+        <tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>network</code></td><td>string</td><td><code>'devnet'</code></td><td>Solana cluster: <code>mainnet-beta</code>, <code>devnet</code>, <code>testnet</code></td></tr>
+        <tr><td><code>wallet</code></td><td>string</td><td>—</td><td>Path to wallet keypair JSON file</td></tr>
+        <tr><td><code>limits.perTransaction</code></td><td>number</td><td><code>0.1</code></td><td>Max SOL per single transaction</td></tr>
+        <tr><td><code>limits.daily</code></td><td>number</td><td><code>1.0</code></td><td>Max SOL per 24-hour rolling window</td></tr>
+        <tr><td><code>riskThreshold</code></td><td>number</td><td><code>0.5</code></td><td>Max acceptable risk score (0–1)</td></tr>
+        <tr><td><code>allowlist</code></td><td>string[]</td><td><code>[]</code></td><td>Trusted recipient addresses</td></tr>
+        <tr><td><code>blocklist</code></td><td>string[]</td><td><code>[]</code></td><td>Blocked recipient addresses</td></tr>
+        <tr><td><code>validator.simulate</code></td><td>boolean</td><td><code>true</code></td><td>Enable transaction simulation</td></tr>
+        <tr><td><code>validator.checkContract</code></td><td>boolean</td><td><code>true</code></td><td>Enable contract security analysis</td></tr>
+        <tr><td><code>validator.evaluateNecessity</code></td><td>boolean</td><td><code>true</code></td><td>Enable AI necessity evaluation</td></tr>
+        <tr><td><code>onApprove</code></td><td>function</td><td>—</td><td>Callback after approved transaction</td></tr>
+        <tr><td><code>onReject</code></td><td>function</td><td>—</td><td>Callback after rejected transaction</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="api-reference">API Reference</h2>
+
+    <h3>clpay.pay(options)</h3>
+    <p>Initiate a payment through the full validation pipeline.</p>
+    <pre>const result = await clpay.pay({
+  to: string,          // Recipient address or .sol domain
+  amount: number,      // Amount in SOL
+  token?: string,      // SPL token mint (default: native SOL)
+  reason: string,      // Why this payment is needed
+  taskContext: string,  // Current task description for necessity eval
+  priority?: 'low' | 'medium' | 'high',  // Transaction priority
+  memo?: string,       // On-chain memo
+});</pre>
+
+    <p>Returns a <code>PaymentResult</code> object:</p>
+    <pre>{
+  status: 'approved' | 'rejected' | 'pending',
+  txHash?: string,           // Solana transaction signature
+  riskScore: number,         // 0–1 risk assessment
+  necessity: 'high' | 'medium' | 'low' | 'none',
+  simulation: {
+    success: boolean,
+    balanceChange: number,
+    logs: string[],
+  },
+  rejection?: {
+    reason: string,          // Human-readable rejection reason
+    code: string,            // Machine-readable code
+    details: object,         // Additional context
+  }
+}</pre>
+
+    <h3>clpay.simulate(options)</h3>
+    <p>Simulate a transaction without executing it. Same parameters as <code>pay()</code>.</p>
+    <pre>const sim = await clpay.simulate({
+  to: 'merchant.sol',
+  amount: 0.05,
+  reason: 'Testing simulation',
+});
+// sim.balanceChange, sim.logs, sim.success</pre>
+
+    <h3>clpay.getBalance()</h3>
+    <p>Get current wallet balance.</p>
+    <pre>const balance = await clpay.getBalance();
+// { sol: 2.45, tokens: [{ mint: '...', amount: 100, symbol: 'USDC' }] }</pre>
+
+    <h3>clpay.getHistory(options?)</h3>
+    <p>Retrieve transaction history with filtering.</p>
+    <pre>const history = await clpay.getHistory({
+  limit: 20,
+  status: 'approved',    // 'approved' | 'rejected' | 'all'
+  from: new Date('2026-01-01'),
+  to: new Date(),
+});</pre>
+
+    <h2 id="validator">Validator Agent</h2>
+    <p>The validator is a side-agent that runs before every transaction. It operates as an independent decision-maker with its own evaluation pipeline.</p>
+
+    <h3>Pipeline Stages</h3>
+    <ul>
+      <li><code>SimulationStage</code> — Executes a dry-run of the transaction on Solana, capturing all state changes, token movements, and compute units consumed.</li>
+      <li><code>SecurityStage</code> — Checks the recipient address against known scam databases, verifies contract source code (if available), and analyzes transaction patterns.</li>
+      <li><code>NecessityStage</code> — Uses the current task context to evaluate whether the purchase is essential. Considers alternative free resources and cost-benefit ratio.</li>
+      <li><code>LimitStage</code> — Enforces per-transaction and daily spending limits. Cannot be overridden by the AI.</li>
+    </ul>
+
+    <h3>Custom Stages</h3>
+    <p>You can add custom validation stages:</p>
+    <pre>import { CLPay, ValidationStage } from '@clpay/core';
+
+class ApprovalStage extends ValidationStage {
+  async validate(tx) {
+    if (tx.amount > 0.1) {
+      // Require human approval for large transactions
+      const approved = await this.requestHumanApproval(tx);
+      return approved
+        ? { pass: true }
+        : { pass: false, reason: 'Human rejected the transaction' };
+    }
+    return { pass: true };
+  }
+}
+
+const clpay = new CLPay({
+  // ...config
+  validator: {
+    customStages: [new ApprovalStage()],
+  },
+});</pre>
+
+    <h2 id="risk-engine">Risk Engine</h2>
+    <p>The risk engine produces a score from 0 (safe) to 1 (dangerous) based on multiple signals:</p>
+
+    <table>
+      <thead>
+        <tr><th>Signal</th><th>Weight</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Recipient reputation</td><td>0.25</td><td>Known merchant vs unknown address</td></tr>
+        <tr><td>Contract verification</td><td>0.20</td><td>Verified source code, audit status</td></tr>
+        <tr><td>Transaction pattern</td><td>0.15</td><td>Unusual amounts, frequency, timing</td></tr>
+        <tr><td>Simulation result</td><td>0.20</td><td>Unexpected state changes or failures</td></tr>
+        <tr><td>Historical behavior</td><td>0.10</td><td>Past interactions with this recipient</td></tr>
+        <tr><td>Network conditions</td><td>0.10</td><td>Congestion, fee spikes, anomalies</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout--warn">
+      <p>⚠ Transactions with a risk score above your configured <code>riskThreshold</code> are automatically blocked. The default threshold is 0.5. For production use with real funds, we recommend starting at 0.3.</p>
+    </div>
+
+    <h2 id="security-model">Security Model</h2>
+
+    <h3>Key Management</h3>
+    <p>Private keys are never exposed to the AI agent. The wallet module handles all cryptographic operations in an isolated context:</p>
+    <ul>
+      <li>Keys encrypted at rest with AES-256-GCM</li>
+      <li>Decryption requires validator pipeline approval</li>
+      <li>Memory is zeroed after signing operations</li>
+      <li>Optional HSM support for enterprise deployments</li>
+    </ul>
+
+    <h3>Threat Model</h3>
+    <ul>
+      <li>AI prompt injection attempting unauthorized payments → blocked by independent validator agent</li>
+      <li>Malicious merchant addresses → caught by security stage and blocklist</li>
+      <li>Excessive spending → hard limits enforced at wallet level, not overridable by AI</li>
+      <li>Transaction manipulation → simulation detects unexpected state changes</li>
+    </ul>
+
+    <h2 id="events">Events & Hooks</h2>
+    <p>CLPAY emits events at every stage of the payment lifecycle:</p>
+    <pre>clpay.on('payment:initiated', (tx) => { /* ... */ });
+clpay.on('validation:stage', (stage, result) => { /* ... */ });
+clpay.on('payment:approved', (tx, result) => { /* ... */ });
+clpay.on('payment:rejected', (tx, reason) => { /* ... */ });
+clpay.on('payment:executed', (tx, signature) => { /* ... */ });
+clpay.on('limit:warning', (usage) => { /* 80% of daily limit */ });
+clpay.on('limit:reached', (usage) => { /* daily limit hit */ });</pre>
+
+    <h2 id="cli">CLI</h2>
+    <p>CLPAY includes a CLI for wallet management and monitoring:</p>
+    <pre># Check wallet balance
+npx clpay balance
+
+# View transaction history
+npx clpay history --limit 10
+
+# Test a payment (simulation only)
+npx clpay simulate --to merchant.sol --amount 0.01
+
+# Export audit log
+npx clpay audit --format json --output audit.json
+
+# Manage allowlist
+npx clpay allow add openai.merchant.sol
+npx clpay allow list
+npx clpay allow remove openai.merchant.sol</pre>
+
+    <div class="callout">
+      <p>💡 All CLI commands support <code>--network</code> flag to specify the Solana cluster. Default is <code>devnet</code>.</p>
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
