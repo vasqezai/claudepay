@@ -17,7 +17,7 @@
   --pink: #FF6B9D;
   --cyan: #00E5FF;
   --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-accent: 'Jim Nightshade', cursive;
+  --font-accent: 'Merriweather', Georgia, serif;
   --mono: 'JetBrains Mono', 'Fira Code', monospace;
   --radius: 12px;
   --radius-sm: 8px;
@@ -137,7 +137,8 @@ img { max-width: 100%; display: block; }
 .hero__title--accent {
   color: var(--accent);
   font-family: var(--font-accent);
-  font-weight: 400;
+  font-weight: 700;
+  font-style: italic;
 }
 .hero__subtitle {
   font-size: clamp(16px, 2vw, 19px);
