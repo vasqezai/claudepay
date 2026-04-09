@@ -144,6 +144,26 @@ No parameters. Returns current SOL balance, daily spent/remaining, limits, netwo
 
 ---
 
+## Mainnet Usage
+
+CLPAY works on mainnet — same code, just different config:
+
+```json
+{
+  "CLPAY_NETWORK": "mainnet-beta",
+  "CLPAY_WALLET": "./keys/mainnet-wallet.json",
+  "CLPAY_RISK_THRESHOLD": "0.3",
+  "CLPAY_PER_TX_LIMIT": "0.05",
+  "CLPAY_DAILY_LIMIT": "0.5"
+}
+```
+
+For mainnet you need a wallet with real SOL. Export a keypair from Phantom, Solflare, or generate one with `solana-keygen`. The `generate-wallet.js` script is devnet-only (free airdrop).
+
+We recommend lower limits and a stricter risk threshold for mainnet. Start small, monitor the audit log, adjust as needed.
+
+---
+
 ## Environment Variables
 
 All config is via env vars (set in the MCP config or shell):
