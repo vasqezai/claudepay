@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/CLPAY-Autonomous_AI_Payments-E63946?style=for-the-badge&labelColor=0a0a0f" alt="CLPAY" />
+  <img src="https://img.shields.io/badge/CLAUDEPAY-Autonomous_AI_Payments-E63946?style=for-the-badge&labelColor=0a0a0f" alt="CLAUDEPAY" />
 </p>
 
-<h1 align="center">CLPAY</h1>
+<h1 align="center">CLAUDEPAY</h1>
 <p align="center">
   <strong>Autonomous payments for Claude using Solana</strong><br>
   Secured by pre-execution validation and real-time risk analysis
@@ -17,16 +17,16 @@
 
 ---
 
-## What is CLPAY?
+## What is CLAUDEPAY?
 
-CLPAY is a skill that gives AI agents (Claude, Kiro, etc.) the ability to **independently pay** for resources — subscriptions, APIs, services — through a **Solana wallet**.
+CLAUDEPAY is a skill that gives AI agents (Claude, Kiro, etc.) the ability to **independently pay** for resources — subscriptions, APIs, services — through a **Solana wallet**.
 
 Every payment goes through a **validator agent** that acts as an independent gatekeeper. No transaction executes without passing all checks.
 
 ```
 Claude: "I need GPT-4 API access for comparison analysis"
 
-  ⟡ CLPAY  Initiating payment validation...
+  ⟡ CLAUDEPAY  Initiating payment validation...
   ✓ Simulating transaction: 0.02 SOL → OpenAI merchant
   ✓ Contract verified — no malicious patterns
   ✓ Risk score: 0.12 / 1.00 — LOW
@@ -38,7 +38,7 @@ Claude: "I need GPT-4 API access for comparison analysis"
 
 ## Quick Start (MCP — recommended)
 
-The fastest way to use CLPAY is as an MCP server. This lets Claude / Kiro call payment tools directly from chat.
+The fastest way to use CLAUDEPAY is as an MCP server. This lets Claude / Kiro call payment tools directly from chat.
 
 ### 1. Install
 
@@ -72,12 +72,12 @@ Copy `mcp.example.json` into your MCP config:
       "args": ["mcp-server.js"],
       "cwd": "/FULL/PATH/TO/clpay",
       "env": {
-        "CLPAY_WALLET": "./keys/dev-wallet.json",
-        "CLPAY_NETWORK": "devnet",
-        "CLPAY_RISK_THRESHOLD": "0.5",
-        "CLPAY_PER_TX_LIMIT": "0.1",
-        "CLPAY_DAILY_LIMIT": "1.0",
-        "CLPAY_ALLOWLIST": ""
+        "CLAUDEPAY_WALLET": "./keys/dev-wallet.json",
+        "CLAUDEPAY_NETWORK": "devnet",
+        "CLAUDEPAY_RISK_THRESHOLD": "0.5",
+        "CLAUDEPAY_PER_TX_LIMIT": "0.1",
+        "CLAUDEPAY_DAILY_LIMIT": "1.0",
+        "CLAUDEPAY_ALLOWLIST": ""
       }
     }
   }
@@ -100,7 +100,7 @@ Once connected, the AI agent has access to these tools:
 The agent can now say things like:
 > "I need to pay 0.02 SOL for API access to complete this task"
 
-And CLPAY will simulate, validate, risk-check, and either approve or reject — all automatically.
+And CLAUDEPAY will simulate, validate, risk-check, and either approve or reject — all automatically.
 
 ---
 
@@ -146,15 +146,15 @@ No parameters. Returns current SOL balance, daily spent/remaining, limits, netwo
 
 ## Mainnet Usage
 
-CLPAY works on mainnet — same code, just different config:
+CLAUDEPAY works on mainnet — same code, just different config:
 
 ```json
 {
-  "CLPAY_NETWORK": "mainnet-beta",
-  "CLPAY_WALLET": "./keys/mainnet-wallet.json",
-  "CLPAY_RISK_THRESHOLD": "0.3",
-  "CLPAY_PER_TX_LIMIT": "0.05",
-  "CLPAY_DAILY_LIMIT": "0.5"
+  "CLAUDEPAY_NETWORK": "mainnet-beta",
+  "CLAUDEPAY_WALLET": "./keys/mainnet-wallet.json",
+  "CLAUDEPAY_RISK_THRESHOLD": "0.3",
+  "CLAUDEPAY_PER_TX_LIMIT": "0.05",
+  "CLAUDEPAY_DAILY_LIMIT": "0.5"
 }
 ```
 
@@ -170,12 +170,12 @@ All config is via env vars (set in the MCP config or shell):
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `CLPAY_WALLET` | `./keys/dev-wallet.json` | Path to wallet keypair |
-| `CLPAY_NETWORK` | `devnet` | `devnet`, `testnet`, `mainnet-beta` |
-| `CLPAY_RISK_THRESHOLD` | `0.5` | Max risk score (0–1) |
-| `CLPAY_PER_TX_LIMIT` | `0.1` | Max SOL per transaction |
-| `CLPAY_DAILY_LIMIT` | `1.0` | Max SOL per 24h |
-| `CLPAY_ALLOWLIST` | `` | Comma-separated trusted addresses |
+| `CLAUDEPAY_WALLET` | `./keys/dev-wallet.json` | Path to wallet keypair |
+| `CLAUDEPAY_NETWORK` | `devnet` | `devnet`, `testnet`, `mainnet-beta` |
+| `CLAUDEPAY_RISK_THRESHOLD` | `0.5` | Max risk score (0–1) |
+| `CLAUDEPAY_PER_TX_LIMIT` | `0.1` | Max SOL per transaction |
+| `CLAUDEPAY_DAILY_LIMIT` | `1.0` | Max SOL per 24h |
+| `CLAUDEPAY_ALLOWLIST` | `` | Comma-separated trusted addresses |
 
 ---
 
@@ -251,7 +251,7 @@ node test.js
 ```
 
 ```
-  ◈ CLPAY — Test Suite
+  ◈ CLAUDEPAY — Test Suite
   ──────────────────────────────────────────────────
 
   Risk Engine
@@ -327,7 +327,7 @@ class HumanApprovalStage extends ValidationStage {
 
 ```
 clpay/
-├── mcp-server.js          # MCP server — connects AI agents to CLPAY
+├── mcp-server.js          # MCP server — connects AI agents to CLAUDEPAY
 ├── mcp.example.json       # Example MCP config for Kiro / Claude
 ├── generate-wallet.js     # Creates devnet wallet + airdrops SOL
 ├── skill/
@@ -396,5 +396,5 @@ MIT
 ---
 
 <p align="center">
-  <strong>CLPAY</strong> — giving AI financial autonomy, responsibly.
+  <strong>CLAUDEPAY</strong> — giving AI financial autonomy, responsibly.
 </p>
