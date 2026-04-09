@@ -182,54 +182,29 @@ All config is via env vars (set in the MCP config or shell):
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────┐
-│              AI Agent (Claude / Kiro)                │
-│                                                     │
-│  "I need to pay for X to complete this task"        │
-└──────────────────────┬──────────────────────────────┘
-                       │ MCP tool call
-                       ▼
-┌─────────────────────────────────────────────────────┐
-│               MCP Server (mcp-server.js)            │
-│                                                     │
-│  clpay_pay · clpay_simulate · clpay_balance · ...   │
-└──────────────────────┬──────────────────────────────┘
-                       │
-                       ▼
-┌─────────────────────────────────────────────────────┐
-│                    CLPay Core                        │
-│                                                     │
-│  ┌─────────────┐  ┌──────────────┐  ┌────────────┐ │
-│  │   Wallet     │  │  Risk Engine │  │  Audit Log │ │
-│  │  (isolated)  │  │  (6 signals) │  │  (full tx) │ │
-│  └──────┬──────┘  └──────┬───────┘  └────────────┘ │
-│         │                │                          │
-│         ▼                ▼                          │
-│  ┌─────────────────────────────────────────────┐   │
-│  │            Validator Agent (side-agent)       │   │
-│  │                                              │   │
-│  │  ┌────────────┐  ┌──────────┐  ┌──────────┐ │   │
-│  │  │ Simulation │→ │ Security │→ │Necessity │ │   │
-│  │  │   Stage    │  │  Stage   │  │  Stage   │ │   │
-│  │  └────────────┘  └──────────┘  └──────────┘ │   │
-│  │         │              │             │       │   │
-│  │         ▼              ▼             ▼       │   │
-│  │  ┌─────────────────────────────────────────┐ │   │
-│  │  │           Limit Stage (hard cap)        │ │   │
-│  │  └─────────────────────────────────────────┘ │   │
-│  │                     │                        │   │
-│  │            ┌────────┴────────┐               │   │
-│  │            ▼                 ▼               │   │
-│  │      ◈ APPROVED        ◈ REJECTED           │   │
-│  │      (sign & send)     (block + explain)     │   │
-│  └──────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────┘
-                       │
-                       ▼
-              ┌─────────────────┐
-              │  Solana Network  │
-              │  (devnet/main)   │
-              └─────────────────┘
+AI Agent (Claude / Kiro)
+    │
+    │  MCP tool call
+    ▼
+MCP Server ─── clpay_pay / clpay_simulate / clpay_balance / clpay_history
+    │
+    ▼
+CLPay Core
+    │
+    ├── Wallet (isolated keys)
+    ├── Risk Engine (6 signals)
+    ├── Audit Log
+    │
+    ▼
+Validator Pipeline
+    │
+    │  1. Simulation ── dry-run on Solana
+    │  2. Security ──── risk score + allowlist/blocklist
+    │  3. Necessity ─── is this purchase needed?
+    │  4. Limits ────── per-tx + daily caps
+    │
+    ├── ◈ APPROVED → sign & send to Solana
+    └── ◈ REJECTED → block + explain why
 ```
 
 ---
