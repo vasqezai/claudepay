@@ -377,15 +377,9 @@ clpay.on('limit:warning', (usage) => { });
 
 ---
 
-## Roadmap
+## DEV SOCIAL
 
-- [ ] SPL token support (USDC, USDT)
-- [ ] LLM-based necessity evaluation (replace keyword heuristic)
-- [ ] On-chain program verification via Solana Explorer API
-- [ ] Scam address database integration
-- [ ] Multi-sig support for high-value transactions
-- [ ] Dashboard UI for monitoring payments
-- [ ] Hardware wallet (Ledger) support
+https://x.com/Th3Noryx
 
 ---
 
